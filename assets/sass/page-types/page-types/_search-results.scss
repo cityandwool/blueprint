@@ -1,0 +1,306 @@
+/* ==========================================================================
+   SEARCH RESULTS
+   ========================================================================== */
+
+ul.search-toggle {
+	padding: 0px;
+	margin: 0px 0px 0px $gutter/2;
+	@extend %clearfix;
+	> li {
+		list-style: none;
+		display: inline-block;
+		float: left;
+		margin-right: $gutter/4;
+		a {
+			display: block;
+			padding: $gutter/2 $gutter;
+			background: $gray-light;
+			color: $black;
+			text-decoration: none;
+			vertical-align: bottom;
+			@include border-radius($gutter/4 $gutter/4 0px 0px);
+			&:hover {
+				color: $white;
+				background: $primary;
+				span {
+					color: $primary;
+				}
+			}
+			span {
+				display: inline-block;
+				font-size: 10px;
+				line-height: 17px;
+				margin-left: $gutter/4;
+				background: $gray-lighter;
+				color: $black;
+				padding: 0px 5px;
+				@include border-radius($gutter $gutter);
+			}
+		}
+		&.active a {
+			color: $white;
+			background: $primary;
+			span {
+				background: $white;
+				color: $primary;
+			}
+		}
+	}
+}
+
+section.type-charities {
+	form {
+		display: none;
+		&.active {
+			display: block;
+		}
+	}
+}
+section.type-fundraisers {
+	form {
+		display: none;
+		&.active {
+			display: block;
+		}
+	}
+}
+
+// Target Opera due to calc not working DR
+x:-o-prefocus, .form {
+	position: relative;
+}
+x:-o-prefocus, .form .btn {
+	position: absolute;
+	top: $gutter/2;
+	right: $gutter/2;
+}
+
+.form {
+	background: $primary;
+	padding: $gutter/2;
+	@include border-radius($gutter/4 $gutter/4 $gutter/4 $gutter/4);
+	label {
+		display: none;
+	}
+	input {
+		margin-bottom: 0px;
+		border: 0px;
+		@include calc(width, "100% - 160px");
+		@include border-radius($gutter/4 $gutter/4);
+	}
+	html.lt-ie9 & {
+		position: relative;
+		.btn {
+			position: absolute;
+			top: $gutter/2;
+			right: $gutter/2;
+		}
+	}
+	.btn {
+		float: right;
+		clear: none;
+		margin: 0px;
+		width: 150px;
+		height: 64px;
+		background: $primary;
+		color: $white;
+		&:hover {
+			background: $primary-dark;
+		}
+		
+	}
+}
+
+.results {
+	display: none;
+	&.active {
+		display: block;
+	}
+}
+
+ul.search-results {
+	padding: 0px;
+	margin: $gutter 0px 0px 0px;
+	clear: both;
+	> li {
+		@extend %clearfix;
+		list-style: none;
+		position: relative;
+		//min-height: 160px; // To include height of two call to action buttons DR
+		display: block;
+		text-decoration: none;
+		padding: $gutter 0px;
+		border-bottom: 1px solid $gray;
+		background: transparent;
+		@include transition(background 0.5s ease-in-out);
+		&:last-child {
+			border: none;
+		}
+		// Image can be found below
+		.image {
+			$s: 150px;
+			width: $s;
+			height: $s;
+			float: left;
+			overflow: hidden;
+			img {
+				max-width: 100%;
+				height: auto;
+			}
+		}
+		.content {
+			margin-left: $gutter + 150;
+			margin-right: $gutter + 150;
+			h2 {
+				margin: 0px;
+				a {
+					@extend %primary;
+					color: $primary;
+					text-decoration: none;
+				}
+			}
+			p {
+				color: $black;
+				&.charity-number, &.running-for {
+					color: $gray;
+					margin-top: 0px;
+					font-size: 14px;
+					a {
+						color: $gray;
+						text-decoration: none;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+				a {
+					color: $primary;
+				}
+			}
+		}
+		.calls-to-action {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			.btn {
+				clear: both;
+				margin-bottom: 0px;
+				width: 150px;
+				text-align: center;
+				margin-right: 0px;
+				&:after {
+					content: '';
+				}
+			}
+		}
+	}
+}
+
+.fund-image {
+	$s: 150px;
+	width: $s;
+	height: $s;
+	float: left;
+	position: relative;
+	overflow: hidden; // To stop overlapping h3 link below DR
+	a {
+		position: absolute;
+		$offset: 7px;
+		top: $offset;
+		left: $offset;
+		right: $offset;
+		bottom: $offset;
+		display: block;
+		text-align: center;
+		overflow: hidden;
+		text-decoration: none;
+		cursor: pointer;
+		@include border-radius(50% 50%);
+		width: $s - ($offset*2);
+		height: $s - ($offset*2);
+		&:hover {
+			.info {
+				@include opacity(1);
+			}
+		}
+		.info {
+			@include transition(opacity .5s ease-in-out);
+			@include opacity(0);
+			@include border-radius(50% 50%);
+			background: $white;
+			position: absolute;
+			top: 0px; left: 0px; right: 0px; bottom: 0px;
+			width: $s - ($offset*2);
+			height: $s - ($offset*2);
+			text-align: center;
+			&:before {
+				content: '';
+				display: inline-block;
+				height: 100%;
+				vertical-align: middle;
+				margin-right: -0.25em; /* Adjusts for spacing */
+			}
+			p {
+				color: $gray;
+				text-transform: uppercase;
+				font-size: 12px;
+				margin: 0px;
+				line-height: 14px;
+				display: inline-block;
+				vertical-align: middle;
+				strong {
+					color: $primary;
+					display: block;
+					font-size: 28px;
+					line-height: 32px;
+				}
+			}
+		}
+		img {
+			max-height: $s;
+		}
+	}
+	html.lt-ie9 & { 
+		.amount input {
+			display: none;
+		}
+	}
+}
+
+ol.paging {
+	margin: 0px;
+	padding: $gutter 0px 0px 0px;
+	border-top: 1px solid $gray;
+	li {
+		list-style: none;
+		display: inline-block;
+		&.prev a, &.next a {
+			background: $primary;
+			color: $white;
+			@include border-radius($gutter/4 $gutter/4);
+			padding-bottom: $gutter/2 - 7;
+			border-bottom: 4px solid $primary-dark;
+			&:hover {
+				color: $white;
+				text-decoration: none;
+				background: darken($primary,5%);
+			}
+		}
+		&.prev a {
+			
+		}
+		&.next a {
+
+		}
+		a {
+			color: $primary;
+			display: block;
+			text-decoration: none;
+			padding: $gutter/4 $gutter/2;
+			&:hover {
+				color: $primary-dark;
+				text-decoration: underline;
+			}
+		}
+	}
+}

@@ -1,0 +1,123 @@
+/* ==========================================================================
+   VIEWS
+   ========================================================================== */
+
+.draw {
+	aside {
+		@extend %makeCard;
+		border-top-color: $gray-dark;
+		background: $gray-light;
+		color: $gray;
+		p {
+			font-size: .8em;
+			line-height: 1.5em;
+		}
+		h2, h3 {
+			@extend %primary;
+			font-size: 1.5em;
+			color: $gray-dark;
+			margin-right: $gutter*.75;
+		}
+		a {
+			color: $secondary
+		}
+		&.view-need-help {
+			border-top-color: $secondary;
+			background: $secondary-light;
+			color: $secondary;
+			h2, h3 {
+				color: $secondary;
+			}
+			ul {
+				@include norm;
+				li {
+					$push: $gutter*1.5;
+					position: relative;
+					line-height: 2em;
+					margin-left: $push;
+					font-size: .8em;
+					a {
+						text-decoration: none;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+					i {
+						margin-right: $gutter/2;
+						position: absolute;
+						left: -$push;
+						top: 6px;
+					}
+				}
+			}
+		}
+		&.view-payment-secure {
+			// display: none;
+			@include viewIcon(lock);
+			.norton-secured {
+				display: block;
+				width: 140px;
+				height: 76px;
+				text-indent: -9999px;
+				background: url('#{$imageLocation}/norton-secured.png') no-repeat center center;
+				@include background-size(140px 76px);
+				html.no-backgroundsize & {
+					background: url('#{$imageLocation}/norton-secured-ie.png') no-repeat center center;
+				}
+			}
+		}
+		&.view-faq {
+			//display: none;
+			@include viewIcon(faq);
+			padding-bottom: 0px; // Accordion items
+			ul.accordion {
+				@extend %clearfix;
+				margin-left: -$gutter; // Make full width
+				margin-right: -$gutter;
+				padding: 0;
+				li.accordion-item {
+					list-style: none;
+					border-top: 1px solid $gray;
+					&.active {
+						.accordion-heading {
+							color: $gray-dark;
+							&:after {
+								@extend %fa;
+								content: "\f107";
+							}
+						}
+					}
+					.accordion-heading {
+						padding: $gutter $gutter*2 $gutter $gutter;
+						cursor: pointer;
+						position: relative;
+						font-size: .8em;
+						line-height: 1.5em;
+						&:after {
+							@extend %fa;
+							position: absolute;
+							content: "\f105";
+							top: $gutter;
+							right: $gutter;
+						}
+					}
+					.accordion-content {
+						padding: 0 $gutter $gutter $gutter;
+						p {
+							font-size: .8em;
+							line-height: 1.5em;
+						}
+						p:first-child {
+							margin-top: 0;
+						}
+					}
+				}
+			}
+		}
+		&.view-stewardship-fees {
+			@include viewIcon(info);
+		}
+	}
+}
+
+

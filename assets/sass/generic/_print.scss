@@ -1,0 +1,47 @@
+/* ==========================================================================
+   PRINT
+   ========================================================================== */
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        font-family: Arial !important;
+    }
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    header {
+    	display: none;
+    }
+	main {
+		margin-top: 0 !important;
+	}
+	.card {
+		&.active {
+			display: block;
+			.btn {
+				display: none !important;
+			}
+		}
+		ul.links {
+			display: none !important;
+		}
+		ul.share {
+			display: none !important;
+		}
+	}
+	.draw {
+		display: none !important;
+	}
+}

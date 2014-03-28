@@ -1,0 +1,245 @@
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+
+*, *:before, *:after {
+   @include box-sizing(border-box);
+}
+
+@mixin block() {
+	max-width: $fixed-width;
+	html.no-respond & {
+		width: $fixed-width;
+	}
+	margin: 0 auto;
+}
+
+.container {
+	@include block();
+	header & {
+		padding: 0 $gutter/2;
+		@include break(medium) {
+			padding: 0 0 0 $gutter;
+		}
+	}
+}
+
+.row {
+	@extend %row;
+	.split {
+		@include column(4,8);
+		@include column(4,4,$mobile);
+	}
+}
+
+$transTime: 0.5s;
+
+html, body {
+	height: 100%; // Needed to get background color to cover whole page DR
+}
+
+.outer {
+	height: 100%;
+	background: $gray;
+	.inner {
+		position: relative;
+		height: 100%;
+		background: $gray-lighter;
+		$shift: 85%;
+		right: 0px;
+		@include transition(right $transTime ease-in-out);
+		@media screen and (max-width: $tablet) {
+			// This doesn't have the respond class otherwise it won't shift DR
+			html.draw-open & {
+				right: $shift;
+			}
+		}
+		#top {
+			@include transition(left $transTime ease-in-out);
+			@media screen and (max-width: $tablet) {
+				// This doesn't have the respond class otherwise it won't shift DR
+				html.draw-open & {
+					left: -$shift;		
+				}
+			}
+		}
+		@include break(medium) {
+			.draw {
+				position: absolute;
+				margin-left: 0px; // Overwrite
+				width: auto;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				left: 100%; 
+				.scroll-draw {
+					@include transition(right $transTime ease-in-out);
+					@include box-shadow(inset 10px -0px 20px 0px $gray-dark);
+					background: $gray;
+					position: fixed;
+					right: -100%;
+					top: 0;
+					padding: $gutter; // Overwrite
+					width: 85%;
+					.view-need-help {
+						margin-top: 0px; // Overwrite
+					}
+					aside {
+						width: 100%; // Get the asides full width DR
+					}
+				}
+			}
+		}
+		html.draw-open & {
+			.draw {
+				.scroll-draw {
+					right: 0px;
+				}
+			}
+		}
+	}
+}
+
+.container {
+	@extend %row;
+	main {
+		margin-top: $gutter*7;
+		body.full-width & {
+			@include column(12);
+		}
+		@include column(8);
+		@include break(medium) {
+			margin-top: $gutter*6;
+			width: 100%;
+			padding-left: $gutter*2;
+			padding-right: $gutter*2; 
+			.card {
+				width: 100%;
+				margin: 0 auto $gutter auto;
+			}
+		}
+		@include break(small) {
+			margin-top: $gutter*3.5;
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	#amount {
+		$w: ($fixed-width / 24)*6 - $gutter*2;
+		.monthly-amount {
+			@include column(4,8);
+			@include column(4,4,$mobile);
+			@include break(small) {
+				margin-top: 0;
+			}
+			margin: $gutter 0;
+			label, input {
+				float: left;
+			}
+			input {
+				width: $w; // Roughly at 220px when container = 1024px
+				@include break(medium) {
+					@include calc(width, "100% - 80px");
+				}
+
+			}
+		}
+		.payment-day {
+			@include column(4,8);
+			@include column(4,4,$mobile);
+			 margin: $gutter 0;
+			label, select {
+				float: left;
+			}
+			.select-wrap {
+				float: left;
+				width: $w; // Roughly at 220px when container = 1024px
+				@include break(medium) {
+					@include calc(width, "100% - 80px");
+				}
+			}
+		}
+		.monthly-amount, .payment-day & {
+			@include break(small) {
+				margin-bottom: 0;
+			}
+			input {
+				@include break(small) {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+	#stewardship-account {
+		iframe {
+			border: none;
+		}
+	}
+	#your-info {
+		.title {
+			@include column(2,8);
+			@include column(4,4,$mobile);
+		}
+		.first-name {
+			@include column(3,8);
+			@include column(4,4,$mobile);
+		}
+		.last-name {
+			@include column(3,8);
+			@include column(4,4,$mobile);
+		}
+		.house-number {
+			@include column(3,8);
+			@include column(4,4,$mobile);
+		}
+		.post-code {
+			@include column(3,8);
+			@include column(4,4,$mobile);
+		}
+		.find-address {
+			@include column(2,8);
+			@include column(4,4,$mobile);
+		}
+		.address {
+			@include column(8,8);
+			@include column(4,4,$mobile);
+		}
+		.gift-aid {
+			.gift-aid-yes, .gift-aid-no {
+				@include column(4,8);
+				@include column(4,4,$mobile);
+			}
+		}
+	}
+	#bank-details {
+		p.question {
+			@include column(4,8);
+		}
+		.account-yes, .account-no {
+			@include column(2,8);
+		}
+	}
+	#thanks {
+		ul.links {
+			@extend %row;
+			li {
+				@include column(2,8);
+				@include column(2,4,$mobile);
+				@include break(small) {
+					padding-bottom: $gutter/2;
+				}
+			}
+		}
+		ul.share {
+			@extend %row;
+			li {
+				@include column(2,8);
+				@include column(2,4,$mobile);
+				@include break(small) {
+					margin: $gutter/2 0;
+				}
+			}
+		}
+	}
+}
+

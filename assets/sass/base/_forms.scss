@@ -1,0 +1,229 @@
+/* ==========================================================================
+   FORMS
+   ========================================================================== */
+
+input, select {
+	border: 1px solid $gray-light;
+	@include border-radius(0px);
+	outline: none; // Remove blue focus
+}
+
+input[type="button"] {
+	padding: $gutter;
+	margin-bottom: $gutter;
+	background: $primary;
+	color: $white;
+	border-bottom: 5px solid darken($primary, 10%);
+	@include border-radius(5px);
+	&:hover {
+		background: darken($primary, 5%);
+	}
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	font-size: $gutter;
+	//line-height: 64px;
+	padding: $gutter*.75;
+	margin-bottom: $gutter;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+	width: 100%;
+	height: 64px;
+
+	/* Large
+
+	font-size: $gutter;
+	//line-height: $gutter*2;
+	padding: $gutter;
+	margin-bottom: $gutter;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+	width: 100%;
+	height: 80px;*/
+}
+
+// Height of selects not correct on FF without height
+@-moz-document url-prefix() {
+	select {
+		padding-top: 28px !important;
+	}
+}
+
+input, textarea {
+    outline: none;
+	@include box-shadow(none);
+}
+
+textarea {
+	font-size: $gutter;
+	padding: $gutter*.75;
+	margin-bottom: $gutter;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+	width: 100%;
+	border: 1px solid $gray-light;
+
+	/* Large
+
+	font-size: $gutter;
+	padding: $gutter;
+	margin-bottom: $gutter;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+	width: 100%;
+	border: 1px solid $gray-light; */
+}
+
+select {
+	font-size: $gutter;
+	//line-height: $gutter*2;
+	padding: $gutter*.75;
+	margin-bottom: $gutter;
+	width: 100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+    height: 64px; // IE fix
+    background: $white !important; // Android mobile browser (must be important)
+
+	/* Large
+
+	font-size: $gutter;
+	line-height: $gutter*2;
+	padding: $gutter;
+	margin-bottom: $gutter;
+	width: 100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    appearance: none;
+    height: 78px; // IE fix
+    background: $white !important; // Android mobile browser (must be important) */
+}
+
+// Dropdown arrow on select-wraps
+.select-wrap {
+	overflow: hidden;
+	border: 1px solid $gray-light;
+	position: relative;
+	select {
+		border: none !important;
+		margin-bottom: 0;
+		width: 135%; // Needs to be larger to hide the dropdown tab in FF
+	}
+	&:after {
+		@extend %arrowDown;
+		top: 50%;
+		margin-top: -5px;
+		right: $gutter;
+		z-index: 4;
+	}
+}
+
+// Using this span method helps apperance in IE browsers
+span.checkbox {
+	$size: $gutter*2;
+	border: 1px solid $gray-light;
+	cursor: pointer;
+	height: $size;
+	width: $size;
+	float: left;
+	margin-right: $gutter/2;
+	background: $white;
+	text-indent: -9999px;
+	position: relative;
+	.well & {
+		border-color: $gray;
+	}
+}
+
+%check {
+	background: $white url('#{$imageLocation}/checked.gif') no-repeat center center;
+	@include background-size(21px 16px);
+	border: 1px $success solid;
+	html.no-backgroundsize & {
+		background: $white url('#{$imageLocation}/checked-ie.gif') no-repeat center center;
+	}
+}
+.checked {
+	@extend %check;
+}
+input[type="checkbox"]:checked + input + span.checkbox {
+	@extend %check;
+}
+input[type="checkbox"]:checked ~ span.checkbox {
+	@extend %check;
+}
+input[type="radio"]:checked + span.checkbox {
+	@extend %check;	
+}
+input[type="radio"]:checked ~ span.checkbox {
+	@extend %check;	
+}
+.checked ~ span.checkbox {
+	@extend %check;	
+}
+
+label[for="keepInformedEmail"] {
+	@include addIcon(desktop);
+	@extend %btn;
+	cursor: pointer;
+}
+
+label[for="keepInformedPost"] {
+	@include addIcon(email);
+	@extend %btn;
+	cursor: pointer;
+}
+
+%success {
+	background: $success;
+	border-bottom-color: darken($success,10%);
+	color: $white;
+}
+
+input[type="checkbox"]:checked + label[for="keepInformedEmail"] {
+	@extend %success;
+}
+input[type="checkbox"]:checked + label[for="keepInformedPost"] {
+	@extend %success;
+}
+
+label {
+ 	&.label-floatlabel {
+		font-size: $gutter/2; 
+		color: $gray;
+		text-transform: uppercase;
+		top: 4px !important;
+	}
+}
+
+.input {
+	position: relative;
+	font-size: $gutter;
+	padding: $gutter;
+	margin-bottom: $gutter;
+	width: 100%;
+	border: 1px solid $gray-light;
+	background: $white;
+	clear: both;
+	.label {
+		font-size: 10px;
+		color: #999;
+		text-transform: uppercase;
+		position: absolute;
+		top: 10px;
+		left: 20px;
+		display: block;
+	}
+	.value {
+		p {
+			margin-bottom: 0;
+		}
+	}
+}

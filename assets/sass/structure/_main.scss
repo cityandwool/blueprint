@@ -1,0 +1,50 @@
+/* ==========================================================================
+   MAIN
+   ========================================================================== */
+
+body { 
+	background: $gray-lighter;
+	&.full-width {
+		background: $white;
+		.outer {
+			background: $white;
+			.inner {
+				background: $white url('#{$imageLocation}/background-01.jpg') repeat center center fixed;
+				@for $i from 1 through 3 {
+					html.background-0#{$i} & {
+						background: $white url('#{$imageLocation}/background-0#{$i}.jpg') repeat center center fixed;
+						@include background-size(cover);
+					}
+				}
+				@include background-size(cover);
+				height: auto;
+				main {
+					section {
+						background: $white;
+						padding: $gutter $gutter*2 $gutter*2 $gutter*2;
+						@include border-radius(10px 10px);
+						@extend %clearfix;
+						@include box-shadow(0px 0px 0px 4px rgba($black,0.1));
+						&.hero {
+							margin-bottom: $gutter*2;
+						}
+					}
+					margin-bottom: $gutter*3;
+				}
+			}
+		}
+	}
+}
+
+a {
+   outline: 0;
+}
+
+input::-moz-focus-inner, select::-moz-focus-inner { 
+  border: 0; 
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}

@@ -1,0 +1,60 @@
+/* ==========================================================================
+   HELPERS
+   ========================================================================== */
+
+.hide {
+	@include visuallyhidden();
+}
+
+.float-right {
+	float: right !important;
+}
+
+.alert {
+	@extend %clearfix;
+	padding: $gutter/2 $gutter $gutter $gutter;
+	margin-bottom: $gutter;
+	&.alert-info {
+		background: lighten($info,40%);
+		color: $info;
+		strong {
+			color: $info;
+		}
+		h1, h2, h3, h4 {
+			color: $info;
+		}
+	}
+	li {
+		margin-bottom: $gutter/2;
+	}
+	&.alert-error {
+		background: lighten($error,50%);
+		color: $error;
+		strong {
+			color: $error;
+		}
+		a.btn.btn-primary {
+			padding-right: 40px;
+		}
+	}
+}
+
+.error, .input-validation-error {
+	border-color: $error;
+	background-color: lighten($error,50%) !important;
+	color: $error;
+}
+
+.well {
+	@extend %clearfix;
+	position: relative;
+	float: left;
+	width: 100%;
+	background: $gray-lighter;
+	padding: $gutter;
+	margin-bottom: $gutter;
+	h2, h3 {
+		margin-top: 0;
+		color: $black !important;
+	}
+}

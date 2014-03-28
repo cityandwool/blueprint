@@ -1,0 +1,203 @@
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+$sH: 50px; // Small height - height of boxes and header when hits smallest break DR
+
+#top {
+	$h: $gutter*4;
+	height: $h;
+	position: fixed;
+	background: $white;
+	width: 100%;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 20;
+	@include break(small) {
+		height: $sH;
+	}
+	&:after {
+		content: "";
+		height: $border;
+		background: rgba($black,0.1);
+		html.no-rgba & {
+  			background: url('#{$imageLocation}/black-trans.png') repeat center center;
+  		}
+		width: 100%;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: $h;
+		z-index: 5;
+		@include break(small) {
+			top: $sH;
+		}
+	}
+	a.brand {
+		line-height: $h;
+		margin: 0;
+		font-size: 1.5em;
+		float: left;
+		text-decoration: none;
+		color: $black;
+		height: $h;
+		width: 114px;
+		text-indent: -9999px;
+		background: url('#{$imageLocation}/give-logo.jpg') no-repeat center center;
+		@include background-size(114px 43px);
+		html.no-backgroundsize & {
+			background: url('#{$imageLocation}/give-logo-ie.jpg') no-repeat center center;
+		}
+		@include break(small) {
+			height: $sH;
+			line-height: $sH;
+			width: 57px;
+			@include background-size(57px 22px);
+		}
+	}
+	a.draw-drop {
+		position: relative;
+		$h: 80px;
+		margin-left: $gutter;
+		width: $h;
+		height: $h;
+		line-height: $h+2;
+		background: lighten($primary,50%);
+		color: $primary;
+		text-align: center;
+		float: right;
+		font-size: 35px;
+		span {
+			display: none;
+			&.pound {
+				display: block;
+				font-family: Arial;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				line-height: $h;
+				width: $h;
+				height: $h;
+				text-align: center;
+				color: $white;
+				font-size: 15px;
+				font-weight: bold;
+			}
+		}
+		&:hover {
+			background: $primary;
+			color: $white;
+			span.pound {
+				color: $primary;
+			}
+		}
+		html.draw-drop & {
+			background: $primary;
+			color: $white;
+			span.pound {
+				color: $primary;
+			}
+		}
+		@include break(small) {
+			width: $sH;
+			height: $sH;
+			line-height: $sH;
+			font-size: $gutter;
+			span.pound {
+				display: none;
+			}
+		}
+	}
+	a.draw-slide {
+		display: none;
+		$h: 80px;
+		width: $h;
+		height: $h;
+		line-height: $h;
+		background: $secondary-light;
+		color: $secondary;
+		text-align: center;
+		font-size: $gutter*1.5;
+		float: right;
+		&:hover {
+			color: $white;
+			background: $secondary;
+		}
+		html.draw-open & {
+			color: $white;
+			background: $secondary;
+		}
+		i {
+			span {
+				@include visuallyhidden;
+			}
+		}		
+		@include break(medium) {
+			display: block;
+			html.draw-open & {
+				display: block;	
+			}
+		}
+		@include break(small) {
+			width: $sH;
+			height: $sH;
+			line-height: $sH;
+			font-size: $gutter;
+		}
+
+	}
+	h1 {
+		$h: 40px;
+		@extend %primary;
+		text-align: right;
+		line-height: $h*2;
+		margin: 0;
+		color: $primary;
+		font-size: 1.2em;
+		font-weight: normal;
+		float: right;
+		display: inline-block;
+		strong {
+			//color: $primary-dark;
+			@include break(medium) {
+				color: $white;
+			}
+		}
+		@media screen and (max-width: $tablet) {
+			// This doesn't have the respond class otherwise it won't shift DR	
+			display: none;
+			html.draw-drop & {
+				display: block;
+			}
+		}
+		@include break(medium) {
+			$h: 80px;
+			position: absolute;
+			top: $h;
+			background: $primary;
+			left: 0;
+			right: 0;
+			text-align: center;
+			color: #FFF;
+			line-height: $gutter*2.5;
+			&:after {
+				content: "";
+				height: $border;
+				background: rgba($black,0.1);
+				html.no-rgba & {
+		  			background: url('#{$imageLocation}/black-trans.png') repeat center center;
+		  		}
+				width: 100%;
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: $gutter*2.5;
+				z-index: 5;
+			}
+		}
+		@include break(small) {
+			top: $sH;
+		}
+	}
+}

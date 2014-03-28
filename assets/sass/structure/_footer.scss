@@ -1,0 +1,42 @@
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+footer {
+	font-size: 0.7em;
+	line-height: 1.5em;
+	color: lighten($gray,10%);
+	a {
+		color: $primary;
+		text-decoration: none;
+	}
+}
+
+body.full-width {
+	footer {
+		display: block;
+		background: $white; 
+		padding: $gutter 0px;
+		position: relative;
+		&:after {
+			content: "";
+			height: 4px;
+			background: rgba($black,0.1);
+			html.no-rgba & {
+	  			background: url('#{$imageLocation}/black-trans.png') repeat center center;
+	  		}
+			width: 100%;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: -4px;
+			z-index: 5;
+		}
+		.container {
+			@extend %clearfix;
+			padding: 0px $gutter; 
+		}
+	}
+}
+
+	

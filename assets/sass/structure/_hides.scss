@@ -1,0 +1,85 @@
+/* ==========================================================================
+   HIDES
+   ========================================================================== */
+
+body {
+	a.draw-drop {
+		display: none;
+		@include break(medium) {
+			display: block;
+		}
+	}
+	.view-stewardship-fees {
+		display: none;
+	}
+	.view-faq {
+		display: none;
+		li {
+			display: none;
+		}
+	}
+
+
+	&.card-amount {
+		a.draw-drop {
+			display: none;
+		}
+		.view-stewardship-fees {
+			display: block;
+		}
+		.view-faq {
+			display: block;
+			li.card-ammount {
+				display: block;
+				//border-left: 1px red solid;
+			}
+		}
+	}
+	&.card-email {
+		.view-faq {
+			display: none;
+			//border-left: 1px green solid;
+		}
+	}
+	&.card-your-info {
+		.view-faq {
+			display: block;
+			li.card-your-info {
+				display: block;
+			}
+		}
+	}
+	&.card-stewardship-account {
+		.view-faq {
+			display: block;
+			li.card-stewardship-account {
+				display: block;
+			}
+		}
+	}
+	&.card-select-direct-debit {
+		.view-faq {
+			display: block;
+			li.card-select-direct-debit {
+				display: block;
+			}
+		}
+	}
+	&.card-bank-details {
+		.view-faq {
+			display: block;
+			li.card-bank-details {
+				display: block;
+			}
+		}
+	}
+
+	&.card-thanks {
+		.view-faq {
+			display: block;
+			li.card-thanks {
+				display: block;
+			}
+		}
+	}
+}

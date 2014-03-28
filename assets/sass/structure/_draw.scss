@@ -1,0 +1,22 @@
+/* ==========================================================================
+   DRAW
+   ========================================================================== */
+
+.draw {
+	position: fixed;
+	$w: ($fixed-width / 12)*4 - $gutter;
+	width: $w;
+	$marg: ($fixed-width - $w) - $gutter/2;
+	margin-left: $marg;
+	height: 100%;
+	overflow: hidden;
+	.scroll-draw {
+		overflow: auto;
+		height: 100%;
+		width: $w + 17px; // This is to hide the scroll bar (17px is the width of IE10 scroll bar)
+		padding-right: 17px; // This is to help Chrome re-align asides
+		.view-need-help {
+			margin-top: $gutter*7;
+		}
+	}
+}

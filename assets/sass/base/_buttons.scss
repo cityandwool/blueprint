@@ -1,0 +1,78 @@
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+%btn {
+	@include border-radius($border-radius);
+	background: $gray-light;
+	color: $black;
+	text-decoration: none;
+	line-height: $gutter*2.5;
+	display: inline-block;
+	padding: 0 $gutter;
+	margin: $gutter 0;
+	border: none;
+	border-bottom: $border solid $gray;
+	float: left;
+	margin-right: $gutter;
+	height: $gutter*2.5;
+	&:hover {
+		background: darken($gray-light,5%);
+	}
+}
+
+.btn {
+	@extend %btn;
+	&.btn-primary {
+		position: relative;
+		color: $white;
+		background: $primary;
+		border-bottom: $border solid $primary-dark;
+		clear: left;
+		&:hover {
+			background: darken($primary,5%);
+		}
+		&:after {
+		    @extend %fa;
+		    position: absolute;
+		    right: $gutter - 3;
+		    content: '\f105';
+		}
+
+		&.wrap {
+			padding: 0px;
+			.btn {
+				margin: 0px;
+				padding-right: $gutter*2;
+			    html.lt-ie9 & {
+				 	padding-right: $gutter;
+				}
+			}
+			&.loading {
+				&.btn {
+					&:after {
+					    right: $gutter*.75;
+					    content: '\f021';
+						@include vendorize(animation, spin 2s infinite linear);
+					}
+				}
+			}
+			&.complete {
+				&.btn {
+					&:after {
+					    right: 14px;
+					    content: '\f00c';
+					}
+				}
+			}
+		}
+
+		.alert-info &, .card-secondary & {
+			background: $info;
+			border-bottom: 5px solid darken($info,10%);
+			&:hover {
+				background: darken($info,5%);
+			}
+		}
+	}
+}

@@ -1,0 +1,45 @@
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+nav.primary {
+	float: right;
+	margin: 33px 0 0 0;
+	ul {
+		margin: 0px;
+		padding: 0px;
+		li {
+			list-style: none;
+			display: inline-block;
+			a {
+				display: block;
+				color: $primary;
+				font-size: 12px;
+				text-decoration: none;
+				padding: $gutter/2;
+				border-right: 1px solid $gray-light;
+				&:hover {
+					color: $black;
+				}
+			}
+		}
+	}
+}
+nav.secondary {
+	ul {
+		margin: 0px;
+		padding: 0px;
+		li {
+			list-style: none;
+			display: inline-block;
+			margin-right: $gutter/2;
+			a {
+				display: block;
+				text-decoration: none;
+				&:hover {
+					color: $black;
+				}
+			}
+		}
+	}
+}

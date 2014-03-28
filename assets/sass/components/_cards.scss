@@ -1,0 +1,457 @@
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+
+.card {
+	@extend %clearfix;
+	@extend %makeCard;
+	main & {
+		border-bottom: $border solid $gray-light;
+		border-top-color: $primary;
+		background: $white;
+		color: $gray-dark;
+		&.card-secondary {
+			border-top-color: $secondary;
+			h2, h3 {
+				@extend %primary;
+				color: $secondary;
+				a {
+					color: $secondary;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+		}
+		h2 {
+			font-size: 2.2em;
+			line-height: 1.1em;
+			margin: $gutter*1.5 0 $gutter*2 0;
+			@include break(small) {
+			    font-size: 1.8em;
+			    line-height: 1em;
+			    margin: $gutter 0;  
+			}
+		}
+		h2, h3 {
+			@extend %primary;
+			color: $primary;
+			a {
+				color: $primary;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+		h3 {
+			font-size: 1.5em;
+		}
+		strong {
+			color: $black;
+		}
+		a {
+			color: $gray-dark;
+		}
+	}
+	&.complete {
+  		position: relative;
+  		.overlay {
+			position: absolute;
+  			background: rgba($white, 0.8); // Using the opacity porperty affects child elements
+  			html.no-rgba & {
+  				background: url('#{$imageLocation}/white-trans.png') repeat center center;
+  			}
+  			content: "";
+  			top: -4px; // To cover the border
+  			left: 0;
+  			right: 0;
+  			bottom: 0;
+  			height: 100%;
+  			width: 100%;
+  			z-index: 5;
+	  		.btn {
+	  			$h: 54px;
+	  			$w: 154px;
+	  			position: absolute;
+	  			top: 50%;
+	  			left: 50%;
+	  			margin-top: -($h/2);
+	  			margin-left: -($w/2);
+	  			z-index: 10;
+	  		}
+  		}
+	}
+	&.incomplete {
+  		display: none;
+	}
+}
+
+#amount {
+	label.icon-monthly-amount,
+	label[for="PaymentDetailViewModel_PaymentDay"]
+	{
+		$box: $gutter*4;
+		width: $box;
+		height: $box;
+		line-height: 100px; // As I'm using font awesome
+		overflow: hidden;
+		display: inline-block;
+		background: $primary;
+		color: $white;
+		text-align: center;
+		position: relative;
+		i {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			$s: 48px;
+			margin-top: -($s/2);
+			margin-left: -($s/2);
+			@include long-shadow(text, $primary-dark, 35, false, false, right);
+		}
+		span {
+			display: none;
+		}
+		span.pound {
+			font-family: Arial, Helvetica, sans-serif;
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			line-height: 80px;
+			color: $primary;
+			font-size: 1.4em;
+		}
+	}
+	.monthly-amount {
+		input {
+			padding: $gutter !important;
+			line-height: 40px;
+			height: 80px;
+		}
+	}
+	.payment-day {
+		select {
+			cursor: pointer;
+			line-height: 80px;
+			padding: 0 15px;
+			height: 80px;
+			html.lt-ie9 & {
+				height: 55px !important;
+			}
+		}
+		.select-wrap {
+			height: 80px;
+		}
+	}
+	/* Applying dropdown arrow on wrap
+ 	.payment-day {
+		position: relative;
+		&:after {
+			@extend %arrowDown;
+			top: 37px;
+			right: $gutter*1.5;
+		}
+	}*/
+	label[for="PaymentDetailViewModel_MonthlyAmount"].label-floatlabel {
+		left: 100px !important; // this is to budge it over the icon
+	}
+	.make-anonymously {
+		min-height: 60px;
+		margin: $gutter 0;
+		position: relative;
+		label[for="PaymentDetailViewModel_Anonymous"] {
+			position: absolute;
+			top: 6px;
+			left: 0px;
+			padding-left: 55px;
+			cursor: pointer;
+		}
+	}
+}
+
+// The following is to hide the dropdown menu
+.payment-day .select-wrap {
+	$w: ($fixed-width / 24)*6 - $gutter*2;
+	select {
+		width: $w + 40px;
+	}
+}
+
+#stewardship-account {
+	.iframe {
+		position: relative;
+		$shiftBoth: 2px;
+		&:before {
+			position: absolute;
+			@extend %fa;
+			content: '\f021';
+			@include vendorize(animation, spin 2s infinite linear);
+			top: 0px;
+			left: $shiftBoth;
+		}
+		&:after {
+			position: absolute;
+			top: 0px;
+			content: 'Loading...';
+			left: $shiftBoth + 25px;
+		}
+		iframe {
+			position: relative;
+			z-index: 1;
+			// Has it's own custom CSS
+		}
+	}
+}
+
+#your-info {
+	/* Being applied global to element
+	.title {
+		position: relative;
+		&:after {
+			@extend %arrowDown;
+			top: 37px;
+			right: $gutter*1.5;
+		}
+	}*/
+	a.show-address {
+		display: block;
+		clear: both;
+		margin-bottom: $gutter*2;
+	}
+	.keep-informed {
+		// Can be found in _forms.scss
+	}
+}
+
+.security-question, .address {
+	.select-wrap {
+		margin-bottom: $gutter;
+	}
+}
+
+.gift-aid-image {
+	background: $gray-lighter url('#{$imageLocation}/gift-aid.gif') no-repeat 451px 15px;
+	@include background-size(140px 49px);
+	html.no-backgroundsize & {
+		background: $gray-lighter url('#{$imageLocation}/gift-aid-ie.gif') no-repeat 451px 15px;
+	}
+}
+
+.direct-debit-image {
+	text-indent: -9999px;
+	background: url('#{$imageLocation}/direct-debit.gif') no-repeat center center;
+	&.large {
+		height: 89px;
+		width: 279px;
+		@include background-size(279px 89px);
+		html.no-backgroundsize & {
+			background: url('#{$imageLocation}/direct-debit-ie.gif') no-repeat center center;
+		}
+	}
+	&.small {
+		float: right;
+		margin-left: $gutter;
+		margin-bottom: $gutter;
+		height: 44px;
+		width: 140px;
+		@include background-size(140px 44px);
+		html.no-backgroundsize & {
+			background: url('#{$imageLocation}/direct-debit-small-ie.gif') no-repeat center center;
+		}
+	}
+}
+
+.gift-aid {
+	.gift-aid-yes, .gift-aid-no {
+		position: relative;
+		min-height: 60px;
+		span {
+			position: absolute;
+		}
+		label {
+			position: absolute;
+			left: 0;
+			top: 6px;
+			padding-left: 65px;
+			cursor: pointer;
+		}
+	}
+}
+
+#bank-details {
+	.account-question {
+		margin-bottom: $gutter*2;
+		min-height: $gutter*3;
+		p.question {
+			margin-top: -7px;	
+		}
+		.account-yes, .account-no {
+		position: relative;
+		min-height: 60px;
+		span {
+			position: absolute;
+		}
+		label {
+			position: absolute;
+			left: 0;
+			top: 6px;
+			padding-left: $gutter*3;
+			cursor: pointer;
+		}
+	}
+	}
+}
+
+#select-direct-debit {
+	.direct-debit-list {
+		margin: $gutter*2 0;
+		.direct-debit-item {
+			background: $gray-lighter;
+			padding: $gutter;
+			border: 1px solid $gray-light;
+			margin-bottom: $gutter;
+			position: relative;
+			min-height: $gutter*4;
+			html.lt-ie9 & {
+				min-height: 50px !important;
+			}
+			input[type="radio"] {
+				// This has .hide
+			}
+			span {
+				position: absolute;
+			}
+			label {
+				position: absolute;
+				left: 0;
+				top: 27px;
+				padding-left: $gutter*4;
+				cursor: pointer;
+			}
+			&.new {
+				opacity: 0.7;
+			}
+		}
+	}
+}
+
+#select-account  {
+	.account-list {
+		margin: $gutter*2 0;
+		.account-item {
+			background: $gray-lighter;
+			padding: $gutter;
+			border: 1px solid $gray-light;
+			margin-bottom: $gutter;
+			position: relative;
+			min-height: $gutter*4;
+			html.lt-ie9 & {
+				min-height: 50px !important;
+			}
+			input[type="radio"] {
+				// This has .hide
+			}
+			span {
+				position: absolute;
+			}
+			label {
+				position: absolute;
+				left: 0;
+				top: 27px;
+				padding-left: $gutter*4;
+				cursor: pointer;
+			}
+			&.new {
+				opacity: 0.7;
+			}
+		}
+	}
+}
+
+#thanks {
+	ul.links {
+		padding: 0;
+		$h: 175px; // Set height
+		li {
+			a {
+				width: 100%;
+				height: $h;
+				background: $primary;
+				color: $white;
+				text-decoration: none;
+				display: inline-block;
+				text-align: center;
+				font-size: 0.8em;
+				line-height: 1.5em;
+				padding: $gutter/2;
+				overflow: hidden;
+				i {
+					display: block;
+					text-align: center;
+					margin: $gutter auto;
+					font-size: 4em;
+					color: $white;
+					@include long-shadow(text, $primary-dark, 100, false, false, right);
+				}
+				&:hover {
+					background: $primary-dark;
+					color: $white;
+				}
+			}
+		}
+	}
+	ul.share {
+		margin-top: $gutter*2 !important; // As the grid is on this element
+		margin-bottom: $gutter*2 !important;
+		padding: $gutter 0;
+		border-top: 1px solid $gray-light;
+		border-bottom: 1px solid $gray-light;
+		li {
+			a {
+				@extend %btn;
+				width: 100%;
+				i {
+					margin-right: $gutter/2;
+				}
+			}
+			&.facebook a {
+				color: $white;
+				background: $facebook;
+				border-bottom-color: darken($facebook,10%);
+				&:hover {
+					background: darken($facebook,5%);
+				}
+			}
+			&.twitter a {
+				color: $white;
+				background: $twitter;
+				border-bottom-color: darken($twitter,10%);
+				&:hover {
+					background: darken($twitter,5%);
+				}
+			}
+			&.google-plus a {
+				color: $white;
+				background: $google-plus;
+				border-bottom-color: darken($google-plus,10%);
+				&:hover {
+					background: darken($google-plus,5%);
+				}
+			}
+			&.label {
+				span {
+					display: block;
+					height: 90px;
+					line-height: 90px;
+					color: $gray;
+					i {
+						margin-right: 5px;
+					}
+				}
+			}
+		}
+	}
+}
